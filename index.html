@@ -174,9 +174,229 @@
       font-weight: 500;
       text-transform: capitalize;
     }
+    /* Планшеты */
+    @media (max-width: 768px) {
+      .glass-block {
+        width: 90vw;
+        min-width: 0;
+        padding: 40px 32px 32px 32px;
+        border-radius: 24px;
+      }
+      .glass-block h1 {
+        font-size: 1.8rem;
+        margin-bottom: 24px;
+      }
+      nav {
+        height: 56px;
+        top: 12px;
+        border-radius: 18px;
+      }
+      nav a {
+        font-size: 16px;
+      }
+      nav li {
+        margin: 0 20px;
+      }
+      .datetime-display {
+        min-width: 260px;
+        padding: 14px 18px;
+      }
+      .datetime-display .time {
+        font-size: 1.7rem;
+      }
+    }
+
+    /* Мобильные устройства */
     @media (max-width: 600px) {
-      .glass-block { width: 98vw; min-width: 0; padding: 27px 7vw 22px 7vw;}
-      nav li { margin: 0 15px; }
+      .main-content {
+        padding-top: 80px;
+        padding-bottom: 20px;
+        align-items: flex-start;
+        justify-content: center;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      nav {
+        height: 50px;
+        top: 10px;
+        border-radius: 16px;
+        padding: 0;
+      }
+      
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+      }
+      
+      nav li {
+        margin: 0 10px;
+      }
+      
+      nav a {
+        font-size: 14px;
+        letter-spacing: 0.5px;
+      }
+      
+      .glass-block {
+        width: 94vw;
+        min-width: 0;
+        padding: 32px 24px 28px 24px;
+        border-radius: 20px;
+        margin: 0 auto;
+      }
+      
+      .glass-block h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        letter-spacing: 0.2px;
+      }
+      
+      .glass-block .btn-group {
+        margin-bottom: 16px;
+        margin-top: -12px;
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .glass-block button {
+        padding: 11px 18px;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 280px;
+      }
+      
+      .glass-block label {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+      }
+      
+      .glass-block input[type="text"] {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+        width: 100%;
+        max-width: 200px;
+      }
+      
+      form {
+        width: 100%;
+      }
+      
+      form > div {
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100%;
+      }
+      
+      .glass-block .greet-msg {
+        margin-top: 16px;
+        padding: 8px 10px;
+        font-size: 0.95rem;
+        min-height: 32px;
+        width: 100%;
+        max-width: 280px;
+      }
+      
+      .datetime-display {
+        margin-top: 20px;
+        padding: 12px 16px;
+        min-width: 0;
+        width: 100%;
+        max-width: 260px;
+        border-radius: 10px;
+      }
+      
+      .datetime-display .time {
+        font-size: 1.5rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 6px;
+      }
+      
+      .datetime-display .date {
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    /* Маленькие мобильные устройства */
+    @media (max-width: 480px) {
+      nav {
+        height: 46px;
+        top: 8px;
+      }
+      
+      nav li {
+        margin: 0 8px;
+      }
+      
+      nav a {
+        font-size: 12px;
+      }
+      
+      .main-content {
+        padding-top: 70px;
+        padding-bottom: 15px;
+      }
+      
+      .glass-block {
+        width: 96vw;
+        padding: 28px 20px 24px 20px;
+        border-radius: 18px;
+      }
+      
+      .glass-block h1 {
+        font-size: 1.3rem;
+        margin-bottom: 18px;
+      }
+      
+      .glass-block button {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        max-width: 260px;
+      }
+      
+      .glass-block label {
+        font-size: 0.85rem;
+      }
+      
+      .glass-block input[type="text"] {
+        padding: 7px 10px;
+        font-size: 0.85rem;
+        max-width: 180px;
+      }
+      
+      .glass-block .greet-msg {
+        font-size: 0.9rem;
+        max-width: 260px;
+        padding: 6px 8px;
+      }
+      
+      .datetime-display {
+        padding: 10px 14px;
+        max-width: 240px;
+      }
+      
+      .datetime-display .time {
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+      }
+      
+      .datetime-display .date {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Очень маленькие экраны */
+    @media (max-width: 360px) {
+      .glass-block h1 {
+        font-size: 1.2rem;
+      }
+      
+      .datetime-display .time {
+        font-size: 1.2rem;
+      }
     }
     body::-webkit-scrollbar { width: 0; }
   </style>
@@ -197,7 +417,7 @@
         <button id="color-btn" type="button">Изменить цвет фона</button>
       </div>
       <form id="greet-form" autocomplete="off" style="width:100%; display:flex; flex-direction:column; align-items:center;">
-        <div style="display:flex; flex-direction:row; align-items:center; margin-bottom:6px;">
+        <div style="display:flex; flex-direction:row; align-items:center; margin-bottom:6px; flex-wrap:wrap; justify-content:center;">
           <label for="name-input">Ваше&nbsp;имя:</label>
           <input id="name-input" type="text" placeholder="Введите имя" maxlength="32" required>
         </div>
@@ -295,7 +515,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
+  }
+  
+  @media (min-width: 601px) {
+    html, body {
+      overflow: hidden;
+    }
   }
   body {
     /* Анимированный фон в тёмно-синих тонах */
@@ -343,9 +568,17 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    height: 100vh;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 90px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+  }
+  
+  @media (min-width: 601px) {
+    .main-content {
+      height: 100vh;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 
   .glass-block {
@@ -366,3 +599,4 @@
     transition: background 0.5s cubic-bezier(.56,-0.1,.62,1.04), box-shadow 0.4s;
   }
 </style>
+  
