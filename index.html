@@ -5,33 +5,89 @@
   <title>Мой первый проект</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    /* Светлая тема (по умолчанию) */
     :root {
       --glass-glow: linear-gradient(135deg, rgba(0,133,255,0.20) 0%, rgba(60,255,248,0.12) 100%);
       --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      
+      /* Светлая тема */
+      --bg-gradient: linear-gradient(120deg, #e6f2ff 0%, #d1e7ff 50%, #b8daff 100%);
+      --nav-bg: rgba(240, 248, 255, 0.95);
+      --nav-border: rgba(100, 150, 255, 0.2);
+      --nav-text: #1a3d6e;
+      --nav-hover: #0066cc;
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --text-primary: #1a3d6e;
+      --text-secondary: #2d5aa0;
+      --text-light: #4a7bc8;
+      --input-bg: rgba(255, 255, 255, 0.6);
+      --input-text: #1a3d6e;
+      --input-placeholder: rgba(26, 61, 110, 0.6);
+      --greet-bg: rgba(173, 216, 255, 0.3);
+      --greet-text: #1a3d6e;
+      --datetime-bg: rgba(200, 230, 255, 0.4);
+      --datetime-border: rgba(100, 180, 255, 0.3);
+      --time-color: #0066cc;
+      --date-color: #2d5aa0;
+      --button-gradient: linear-gradient(90deg, #2292f2 60%, #4ff8d1 100%);
+    }
+
+    /* Темная тема */
+    body.dark-theme {
+      --bg-gradient: linear-gradient(120deg, #0a1539 0%, #122050 50%, #23386e 100%);
+      --nav-bg: rgba(18, 37, 66, 0.91);
+      --nav-border: rgba(180, 210, 255, 0.17);
+      --nav-text: #E9F1FF;
+      --nav-hover: #47cafc;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.13);
+      --text-primary: #F5F8FF;
+      --text-secondary: #e5f2ff;
+      --text-light: #d0e8ff;
+      --input-bg: rgba(255, 255, 255, 0.17);
+      --input-text: #153d6e;
+      --input-placeholder: rgba(255, 255, 255, 0.7);
+      --greet-bg: rgba(26, 70, 121, 0.18);
+      --greet-text: #e5f2ff;
+      --datetime-bg: rgba(20, 50, 100, 0.25);
+      --datetime-border: rgba(100, 180, 255, 0.15);
+      --time-color: #ffffff;
+      --date-color: #d0e8ff;
+      --button-gradient: linear-gradient(90deg, #2292f2 60%, #4ff8d1 100%);
     }
     body {
       margin: 0;
       height: 100vh;
-      background: #0E153A;
+      background: var(--bg-gradient);
+      background-size: 400% 400%;
+      animation: gradientFlow 13s ease-in-out infinite;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
       box-sizing: border-box;
+      transition: background 0.5s ease;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%;}
+      50% { background-position: 100% 50%;}
+      100% { background-position: 0% 50%;}
     }
     nav {
       width: 100%;
       padding: 0 0;
-      background: rgba(20, 30, 75, 0.95);
+      background: var(--nav-bg);
       backdrop-filter: blur(6px);
       height: 64px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: 1px solid rgba(100,150,255,0.06);
+      border-bottom: 1px solid var(--nav-border);
       position: fixed;
       top: 0; left: 0;
       z-index: 100;
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
     nav ul {
       list-style: none;
@@ -43,7 +99,7 @@
       margin: 0 32px;
     }
     nav a {
-      color: #E9F1FF;
+      color: var(--nav-text);
       text-decoration: none;
       font-size: 18px;
       font-weight: 500;
@@ -51,7 +107,7 @@
       transition: color 0.2s;
     }
     nav a:hover {
-      color: #47cafc;
+      color: var(--nav-hover);
     }
     .main-content {
       flex: 1;
@@ -66,52 +122,55 @@
       max-width: 94vw;
       padding: 42px 36px 36px 36px;
       border-radius: 28px;
-      background: var(--glass-glow), rgba(255,255,255,0.08);
+      background: var(--glass-glow), var(--glass-bg);
       box-shadow: var(--glass-shadow);
-      border: 1.5px solid rgba(255,255,255,0.13);
+      border: 1.5px solid var(--glass-border);
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       backdrop-filter: blur(16px);
-      transition: background 0.5s cubic-bezier(.56,-0.1,.62,1.04), box-shadow 0.4s;
+      transition: background 0.5s cubic-bezier(.56,-0.1,.62,1.04), box-shadow 0.4s, border-color 0.3s ease;
     }
     .glass-block h1 {
-      color: #F5F8FF;
+      color: var(--text-primary);
       font-size: 2.1rem;
       font-weight: 700;
       margin: 0 0 32px 0;
       text-align: center;
       letter-spacing: 0.4px;
       text-shadow: 0px 2px 16px rgba(47,168,255,0.07);
+      transition: color 0.3s ease;
     }
     .glass-block label {
-      color: #f0f5ff;
+      color: var(--text-secondary);
       font-size: 1rem;
       margin-bottom: 10px;
       margin-right: 8px;
       letter-spacing: 0.5px;
+      transition: color 0.3s ease;
     }
     .glass-block input[type="text"] {
       padding: 9px 14px;
       border-radius: 8px;
       border: none;
       outline: none;
-      background: rgba(255,255,255,0.17);
+      background: var(--input-bg);
       font-size: 1rem;
-      color: #153d6e;
+      color: var(--input-text);
       margin-right: 8px;
       margin-bottom: 15px;
       box-shadow: 0 1px 10px rgba(47,168,255,0.04);
-      transition: background 0.2s;
+      transition: background 0.2s, color 0.3s ease;
     }
     .glass-block input[type="text"]::placeholder {
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--input-placeholder);
       opacity: 1;
     }
     .glass-block input[type="text"]:focus {
-      background: rgba(255,255,255,0.23);
-      color: #0E153A;
+      background: var(--input-bg);
+      filter: brightness(1.1);
+      color: var(--input-text);
     }
     .glass-block .btn-group {
       display: flex;
@@ -123,7 +182,7 @@
       outline: none;
       border: none;
       border-radius: 10px;
-      background: linear-gradient(90deg, #2292f2 60%, #4ff8d1 100%);
+      background: var(--button-gradient);
       color: #fff;
       padding: 13px 23px;
       font-size: 1.01rem;
@@ -139,40 +198,93 @@
       margin-top: 18px;
       padding: 8px 12px;
       border-radius: 7px;
-      background: rgba(26, 70, 121, 0.18);
-      color: #e5f2ff;
+      background: var(--greet-bg);
+      color: var(--greet-text);
       font-size: 1.10rem;
       min-height: 34px;
       letter-spacing: 0.2px;
       text-align: center;
       box-shadow: 0 1px 10px rgba(47,168,255,0.03);
+      transition: background 0.3s ease, color 0.3s ease;
     }
     .datetime-display {
       margin-top: 24px;
       padding: 16px 20px;
       border-radius: 12px;
-      background: rgba(20, 50, 100, 0.25);
+      background: var(--datetime-bg);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(100, 180, 255, 0.15);
+      border: 1px solid var(--datetime-border);
       text-align: center;
       min-width: 280px;
       box-shadow: 0 2px 16px rgba(47,168,255,0.08);
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
     .datetime-display .time {
-      color: #ffffff;
+      color: var(--time-color);
       font-size: 2rem;
       font-weight: 700;
       letter-spacing: 2px;
       text-shadow: 0 2px 12px rgba(100, 180, 255, 0.4);
       margin-bottom: 8px;
       font-family: 'Courier New', monospace;
+      transition: color 0.3s ease;
     }
     .datetime-display .date {
-      color: #d0e8ff;
+      color: var(--date-color);
       font-size: 1rem;
       letter-spacing: 1px;
       font-weight: 500;
       text-transform: capitalize;
+      transition: color 0.3s ease;
+    }
+
+    /* Кнопка переключения темы */
+    .theme-toggle {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      z-index: 99;
+      transition: all 0.3s ease;
+      border: 1.5px solid var(--glass-border);
+    }
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+    .theme-toggle:active {
+      transform: scale(0.95);
+    }
+    
+    @media (max-width: 768px) {
+      .theme-toggle {
+        top: 70px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .theme-toggle {
+        top: 65px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
     }
     /* Планшеты */
     @media (max-width: 768px) {
@@ -402,6 +514,7 @@
   </style>
 </head>
 <body>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">🌙</button>
   <nav>
     <ul>
       <li><a href="#">Меню</a></li>
@@ -505,6 +618,31 @@
     // Обновление времени каждую секунду
     updateDateTime(); // Первоначальное обновление
     setInterval(updateDateTime, 1000);
+
+    // Переключение темы
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    
+    // Проверяем сохраненную тему или устанавливаем светлую по умолчанию
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-theme');
+      themeToggle.textContent = '☀️';
+    } else {
+      themeToggle.textContent = '🌙';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-theme');
+      
+      if (body.classList.contains('dark-theme')) {
+        localStorage.setItem('theme', 'dark');
+        themeToggle.textContent = '☀️';
+      } else {
+        localStorage.setItem('theme', 'light');
+        themeToggle.textContent = '🌙';
+      }
+    });
   </script>
 </body>
 </html>
@@ -523,42 +661,33 @@
     }
   }
   body {
-    /* Анимированный фон в тёмно-синих тонах */
-    background: linear-gradient(120deg, #0a1539 0%, #122050 50%, #23386e 100%);
-    background-size: 400% 400%;
-    animation: blueGradientFlow 13s ease-in-out infinite;
     min-height: 100vh;
     height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
   }
-  @keyframes blueGradientFlow {
-    0% { background-position: 0% 50%;}
-    50% { background-position: 100% 50%;}
-    100% { background-position: 0% 50%;}
-  }
 
   nav {
     position: fixed;
     top: 18px;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100vw;
     margin: 0 auto;
     padding: 0 0 0 0;
-    background: rgba(18, 37, 66, 0.91);
+    background: var(--nav-bg);
     backdrop-filter: blur(15px);
     box-shadow: 0 3px 24px 0 rgba(30,40,75,0.16);
     border-radius: 22px;
-    border: 1.3px solid rgba(180,210,255,0.17);
+    border: 1.3px solid var(--nav-border);
     height: 62px;
     max-width: 98vw;
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
-    left: 50%;
-    transform: translateX(-50%);
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
 
   .main-content {
@@ -588,15 +717,15 @@
     min-height: 440px;
     padding: 56px 48px 48px 48px;
     border-radius: 38px;
-    background: linear-gradient(135deg, rgba(0,133,255,0.20) 0%, rgba(60,255,248,0.12) 100%), rgba(255,255,255,0.11);
+    background: var(--glass-glow), var(--glass-bg);
     box-shadow: 0 12px 48px 0 rgba(31,38,135,0.39);
-    border: 1.9px solid rgba(255,255,255,0.27);
+    border: 1.9px solid var(--glass-border);
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     backdrop-filter: blur(30px) saturate(138%);
-    transition: background 0.5s cubic-bezier(.56,-0.1,.62,1.04), box-shadow 0.4s;
+    transition: background 0.5s cubic-bezier(.56,-0.1,.62,1.04), box-shadow 0.4s, border-color 0.3s ease;
   }
 </style>
   
