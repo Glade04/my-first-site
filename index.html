@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Мой первый проект</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --glass-glow: linear-gradient(135deg, rgba(0,133,255,0.20) 0%, rgba(60,255,248,0.12) 100%);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #0E153A;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      box-sizing: border-box;
+    }
+    nav {
+      width: 100%;
+      padding: 0 0;
+      background: rgba(20, 30, 75, 0.95);
+      backdrop-filter: blur(6px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(100,150,255,0.06);
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 100;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    nav li {
+      margin: 0 32px;
+    }
+    nav a {
+      color: #E9F1FF;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #47cafc;
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .glass-block {
+      min-width: 360px;
+      width: 430px;
+      max-width: 94vw;
+      padding: 42px 36px 36px 36px;
+      border-radius: 28px;
+      background: var(--glass-glow), rgba(255,255,255,0.08);
+      box-shadow: var(--glass-shadow);
+      border: 1.5px solid rgba(255,255,255,0.13);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      backdrop-filter: blur(16px);
+      transition: background 0.5s cubic-bezier(.56,-0.1,.62,1.04), box-shadow 0.4s;
+    }
+    .glass-block h1 {
+      color: #F5F8FF;
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin: 0 0 32px 0;
+      text-align: center;
+      letter-spacing: 0.4px;
+      text-shadow: 0px 2px 16px rgba(47,168,255,0.07);
+    }
+    .glass-block label {
+      color: #f0f5ff;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      margin-right: 8px;
+      letter-spacing: 0.5px;
+    }
+    .glass-block input[type="text"] {
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background: rgba(255,255,255,0.17);
+      font-size: 1rem;
+      color: #153d6e;
+      margin-right: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 10px rgba(47,168,255,0.04);
+      transition: background 0.2s;
+    }
+    .glass-block input[type="text"]::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+      opacity: 1;
+    }
+    .glass-block input[type="text"]:focus {
+      background: rgba(255,255,255,0.23);
+      color: #0E153A;
+    }
+    .glass-block .btn-group {
+      display: flex;
+      flex-direction: row;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .glass-block button {
+      outline: none;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #2292f2 60%, #4ff8d1 100%);
+      color: #fff;
+      padding: 13px 23px;
+      font-size: 1.01rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0px 2px 22px rgba(47,168,255,0.16);
+      transition: background 0.2s, transform 0.14s;
+    }
+    .glass-block button:active {
+      transform: scale(0.96);
+    }
+    .glass-block .greet-msg {
+      margin-top: 18px;
+      padding: 8px 12px;
+      border-radius: 7px;
+      background: rgba(26, 70, 121, 0.18);
+      color: #e5f2ff;
+      font-size: 1.10rem;
+      min-height: 34px;
+      letter-spacing: 0.2px;
+      text-align: center;
+      box-shadow: 0 1px 10px rgba(47,168,255,0.03);
+    }
+    .datetime-display {
+      margin-top: 24px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background: rgba(20, 50, 100, 0.25);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(100, 180, 255, 0.15);
+      text-align: center;
+      min-width: 280px;
+      box-shadow: 0 2px 16px rgba(47,168,255,0.08);
+    }
+    .datetime-display .time {
+      color: #ffffff;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 12px rgba(100, 180, 255, 0.4);
+      margin-bottom: 8px;
+      font-family: 'Courier New', monospace;
+    }
+    .datetime-display .date {
+      color: #d0e8ff;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+    @media (max-width: 600px) {
+      .glass-block { width: 98vw; min-width: 0; padding: 27px 7vw 22px 7vw;}
+      nav li { margin: 0 15px; }
+    }
+    body::-webkit-scrollbar { width: 0; }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#">Меню</a></li>
+      <li><a href="#">Отчёты</a></li>
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Контакты</a></li>
+    </ul>
+  </nav>
+  <div class="main-content">
+    <section class="glass-block" id="glass-block">
+      <h1>Мой первый проект</h1>
+      <div class="btn-group" style="margin-bottom: 18px; margin-top: -15px;">
+        <button id="color-btn" type="button">Изменить цвет фона</button>
+      </div>
+      <form id="greet-form" autocomplete="off" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+        <div style="display:flex; flex-direction:row; align-items:center; margin-bottom:6px;">
+          <label for="name-input">Ваше&nbsp;имя:</label>
+          <input id="name-input" type="text" placeholder="Введите имя" maxlength="32" required>
+        </div>
+        <button type="submit" style="margin-bottom:0;">Поприветствовать</button>
+      </form>
+      <div class="greet-msg" id="greet-msg"></div>
+      <div class="datetime-display" id="datetime-display">
+        <div class="time" id="time"></div>
+        <div class="date" id="date"></div>
+      </div>
+    </section>
+  </div>
+  <script>
+    // Цветовые варианты "свечения"/градиента для центрального блока (glassmorphism)
+    const glassVariants = [
+      {
+        glow: 'linear-gradient(135deg, rgba(0,133,255,0.22) 0%, rgba(60,255,248,0.13) 100%)',
+        shadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
+      },
+      {
+        glow: 'linear-gradient(135deg, rgba(89,63,255,0.24) 0%, rgba(255,80,147,0.20) 100%)',
+        shadow: '0 8px 32px 0 rgba(136, 70, 188, 0.30)'
+      },
+      {
+        glow: 'linear-gradient(120deg, rgba(0,220,255,0.20), rgba(255,255,120,0.11) 100%)',
+        shadow: '0 8px 32px 0 rgba(29, 180, 170, 0.25)'
+      },
+      {
+        glow: 'linear-gradient(120deg, rgba(255,190,120,0.18), rgba(0,133,255,0.18) 100%)',
+        shadow: '0 8px 32px 0 rgba(250, 202, 121, 0.13)'
+      },
+      {
+        glow: 'linear-gradient(135deg, rgba(20,220,118,0.20), rgba(60,155,255,0.13) 100%)',
+        shadow: '0 8px 32px 0 rgba(47, 168, 150, 0.16)'
+      }
+    ];
+
+    let currentVariant = 0;
+    const glassBlock = document.getElementById('glass-block');
+    document.getElementById('color-btn').addEventListener('click', () => {
+      currentVariant = (currentVariant + 1) % glassVariants.length;
+      glassBlock.style.background = glassVariants[currentVariant].glow + ', rgba(255,255,255,0.08)';
+      glassBlock.style.boxShadow = glassVariants[currentVariant].shadow;
+    });
+
+    // Приветствие
+    const form = document.getElementById('greet-form');
+    const greetMsg = document.getElementById('greet-msg');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const userName = document.getElementById('name-input').value.trim();
+      if (userName.length) {
+        greetMsg.textContent = `Привет, ${userName}! 👋`;
+      } else {
+        greetMsg.textContent = 'Пожалуйста, введите ваше имя.';
+      }
+    });
+
+    // Функция для форматирования времени и даты
+    function updateDateTime() {
+      const now = new Date();
+      
+      // Форматирование времени (ЧЧ:ММ:СС)
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const timeString = `${hours}:${minutes}:${seconds}`;
+      
+      // Форматирование даты (день недели, число месяц год)
+      const daysOfWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+      const months = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 
+                     'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
+      
+      const dayOfWeek = daysOfWeek[now.getDay()];
+      const day = now.getDate();
+      const month = months[now.getMonth()];
+      const year = now.getFullYear();
+      const dateString = `${dayOfWeek}, ${day} ${month} ${year}`;
+      
+      // Обновление элементов
+      document.getElementById('time').textContent = timeString;
+      document.getElementById('date').textContent = dateString;
+    }
+
+    // Обновление времени каждую секунду
+    updateDateTime(); // Первоначальное обновление
+    setInterval(updateDateTime, 1000);
+  </script>
+</body>
+</html>
+<style>
+  html, body {
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  body {
+    /* Анимированный фон в тёмно-синих тонах */
+    background: linear-gradient(120deg, #0a1539 0%, #122050 50%, #23386e 100%);
+    background-size: 400% 400%;
+    animation: blueGradientFlow 13s ease-in-out infinite;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+  }
+  @keyframes blueGradientFlow {
+    0% { background-position: 0% 50%;}
+    50% { background-position: 100% 50%;}
+    100% { background-position: 0% 50%;}
+  }
+
+  nav {
+    position: fixed;
+    top: 18px;
+    left: 0;
+    width: 100vw;
+    margin: 0 auto;
+    padding: 0 0 0 0;
+    background: rgba(18, 37, 66, 0.91);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 3px 24px 0 rgba(30,40,75,0.16);
+    border-radius: 22px;
+    border: 1.3px solid rgba(180,210,255,0.17);
+    height: 62px;
+    max-width: 98vw;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .main-content {
+    flex: 1;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    height: 100vh;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .glass-block {
+    min-width: 420px;
+    width: 520px;
+    max-width: 98vw;
+    min-height: 440px;
+    padding: 56px 48px 48px 48px;
+    border-radius: 38px;
+    background: linear-gradient(135deg, rgba(0,133,255,0.20) 0%, rgba(60,255,248,0.12) 100%), rgba(255,255,255,0.11);
+    box-shadow: 0 12px 48px 0 rgba(31,38,135,0.39);
+    border: 1.9px solid rgba(255,255,255,0.27);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(30px) saturate(138%);
+    transition: background 0.5s cubic-bezier(.56,-0.1,.62,1.04), box-shadow 0.4s;
+  }
+</style>
